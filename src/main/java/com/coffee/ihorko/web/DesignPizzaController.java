@@ -32,7 +32,7 @@ public class DesignPizzaController {
                 new Ingredient("SLSA", "Salsa", Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
-        Type[] types = Ingredient.Type.values();
+        Type[] types = Ingredient.Type.values();;
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
