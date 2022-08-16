@@ -6,8 +6,10 @@ import com.coffee.ihorko.data.Pizza;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +34,8 @@ public class DesignPizzaController {
                 new Ingredient("SLSA", "Salsa", Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
-        Type[] types = Ingredient.Type.values();;
+        Type[] types = Ingredient.Type.values();
+        ;
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
@@ -46,9 +49,12 @@ public class DesignPizzaController {
     }
 
     @PostMapping
-    public String processTaco(Pizza pizza) {
-        // Save the taco...
-        // We'll do this in chapter 3
+    public String processPizza(@Valid @ModelAttribute("pizza") Pizza pizza, Errors errors) {
+
+        if (errors.hasErrors()) {
+            return "design";
+        }
+        // Save the pizza...
         log.info("Processing pizza: " + pizza);
         return "redirect:/orders/current";
     }
