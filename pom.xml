@@ -15,7 +15,7 @@
     <name>coffee-cloud</name>
     <description>Coffe Project Example</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
     </properties>
     <dependencies>
 
