@@ -14,6 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name="pizza_order")
 public class PizzaOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +24,9 @@ public class PizzaOrder implements Serializable {
     private Long id;
 
     private Date placedAt;
+
+    @ManyToOne
+    private User user;
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
@@ -49,10 +53,15 @@ public class PizzaOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Pizza.class)
     private List<Pizza> pizzas = new ArrayList<>();
 
     public void pizza(Pizza pizza) {
         this.pizzas.add(pizza);
+    }
+
+    @PrePersist
+    void placedAt() {
+        this.placedAt = new Date();
     }
 }

@@ -12,9 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Pizza implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Pizza{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +26,15 @@ public class Pizza implements Serializable {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    @ManyToMany()
+    @ManyToMany(targetEntity = Ingredient.class)
     private List<Ingredient> ingredients = new ArrayList<>();
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
+    }
+
+    @PrePersist
+    void createdAt() {
+        this.createdAt = new Date();
     }
 }

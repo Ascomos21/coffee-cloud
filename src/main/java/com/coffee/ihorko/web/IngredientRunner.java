@@ -1,6 +1,7 @@
-package com.coffee.ihorko.repo;
+package com.coffee.ihorko.web;
 
 import com.coffee.ihorko.model.Ingredient;
+import com.coffee.ihorko.repo.IngredientRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

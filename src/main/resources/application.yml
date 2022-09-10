@@ -2,3 +2,12 @@ spring:
   datasource:
   generate-unique-name: false
   name: pizzacloud
+
+  security:
+    oauth2:
+      client:
+        registration:
+         facebook:
+            clientId: <client id>
+            clientSecret: <client secret>
+            scope: email, public_profile
